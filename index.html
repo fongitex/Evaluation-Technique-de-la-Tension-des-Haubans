@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation Technique de la Tension des Haubans TIA-222</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Évaluation Technique de la Tension des Haubans TIA-222</h1>
+        
+        <form id="verificationForm">
+            <label for="height">Hauteur du pylône (H) [m]:</label>
+            <input type="number" id="height" placeholder="Ex: 120" required>
+
+            <label for="length">Longueur du hauban (L) [m]:</label>
+            <input type="number" id="length" placeholder="Ex: 130" required>
+
+            <label for="diameter">Diamètre du hauban (D) [mm]:</label>
+            <input type="number" id="diameter" placeholder="Ex: 25" required>
+
+            <label for="density">Densité du hauban (kg/m³):</label>
+            <input type="number" id="density" placeholder="Ex: 7850" required>
+
+            <label for="windSpeed">Vitesse du vent (v) [m/s]:</label>
+            <input type="number" id="windSpeed" placeholder="Ex: 30" required>
+
+            <label for="deflection">Flèche (d) [m]:</label>
+            <input type="number" id="deflection" placeholder="Ex: 1" required>
+
+            <label for="safetyFactor">Facteur de sécurité (FS):</label>
+            <input type="number" id="safetyFactor" placeholder="Ex: 2" required>
+
+            <label for="measuredTension">Tension mesurée (en tonnes):</label>
+            <input type="number" id="measuredTension" placeholder="Ex: 1.5" required><br>
+
+            <button type="button" onclick="calculate()">Calculer</button>
+        </form>
+
+        <div id="results"></div>
+
+        <h3>Explications des Formules</h3>
+        <pre>
+1. Charge de vent : Charge de vent = 0.5 × Densité de l'air × v² × A_proj
+   - Densité de l'air : Environ 1.225 kg/m³
+   - v : Vitesse du vent en m/s
+   - A_proj : Surface projetée en m²
+
+2. Poids linéaire du hauban : Poids linéaire = Densité × π × (D/2)² × L
+   - Densité : Densité de l'acier, environ 7850 kg/m³
+   - D : Diamètre du hauban (converti en mètres)
+   - L : Longueur du hauban en mètres
+
+3. Surface projetée (A_proj) : A_proj = π × (D/2)²
+   - D : Diamètre du hauban en mètres
+
+4. Tension théorique (T_t) : T_t = (Poids linéaire + Charge de vent) × L / (2 × d)
+   - d : Flèche (déviation) en mètres
+
+5. Tension admissible (T_a) : T_a = T_t / FS
+   - FS : Facteur de sécurité
+
+**Limites de Tension Théorique**
+   - Limite inférieure : 90% de la tension théorique
+   - Limite supérieure : 110% de la tension théorique
+   Ces limites permettent de vérifier si la tension mesurée reste dans un intervalle de tolérance acceptable. Si la tension mesurée dépasse la limite supérieure, cela peut indiquer une surcharge, alors qu'une tension en dessous de la limite inférieure peut signifier un relâchement.
+        </pre>
+
+        <h3>Définition TIA-222</h3>
+        <div>
+            <p>
+            TIA-222 est un ensemble de lignes directrices et de standards pour la conception et la vérification des structures de support, notamment les pylônes, en fonction des charges mécaniques, de la résistance aux vents, et d'autres facteurs environnementaux. 
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        Cette page est développée par Geanah Adil
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
